@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-
+#include "inventorysystem.h"
 using namespace std;
 
 void printHelp()
@@ -29,16 +29,18 @@ void evalCommand(string line)
     else if (line.rfind("find", 0) == 0)
     {
         // Look up the appropriate datastructure to find if the inventory exist
-        cout << "YET TO IMPLEMENT!" << endl;
+        string id = line.substr(5);
+        inventory.findProduct(id);
     }
     // if line starts with listInventory
     else if (line.rfind("listInventory") == 0)
     {
         // Look up the appropriate datastructure to find all inventory belonging to a specific category
-        cout << "YET TO IMPLEMENT!" << endl;
+        string category = line.substr(14);
+        inventory.listCategory(category);
     }
 }
-
+InventorySystem inventory;
 void bootStrap()
 {
     cout << "\n Welcome to Amazon Inventory Query System" << endl;
@@ -46,6 +48,7 @@ void bootStrap()
     cout << "\n> ";
     // TODO: Do all your bootstrap operations here
     // example: reading from CSV and initializing the data structures
+    inventory.loadData("marketing_sample_for_amazon_com-ecommerce__20200101_20200131__10k_data-1.csv");
     // Don't dump all code into this single function
     // use proper programming practices
 }
